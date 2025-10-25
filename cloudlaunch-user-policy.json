@@ -1,0 +1,56 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "ListAllBuckets",
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::cloudlaunch-site-bucket-lekan659",
+                "arn:aws:s3:::cloudlaunch-private-bucket-lekan659",
+                "arn:aws:s3:::cloudlaunch-visible-only-bucket-lekan659"
+            ]
+        },
+        {
+            "Sid": "ReadOnlySiteBucket",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject"
+            ],
+            "Resource": "arn:aws:s3:::cloudlaunch-site-bucket-lekan659/*"
+        },
+        {
+            "Sid": "ReadWritePrivateBucket",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:PutObject"
+            ],
+            "Resource": "arn:aws:s3:::cloudlaunch-private-bucket-lekan659/*"
+        },
+        {
+            "Sid": "NoAccessToVisibleOnlyBucketContents",
+            "Effect": "Deny",
+            "Action": [
+                "s3:GetObject",
+                "s3:PutObject"
+            ],
+            "Resource": "arn:aws:s3:::cloudlaunch-visible-only-bucket-lekan659/*"
+        },
+        {
+            "Sid": "ReadOnlyVPCAccess",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:DescribeVpcs",
+                "ec2:DescribeSubnets",
+                "ec2:DescribeRouteTables",
+                "ec2:DescribeSecurityGroups",
+                "ec2:DescribeInternetGateways"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+
